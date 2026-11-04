@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>类比推理 · 逻辑关系思维导图</title>
+<style>
+  :root{
+    --bg:#f6f6fa;
+    --surface:#ffffff;
+    --surface-2:#fbfafd;
+    --ink:#1c1a2a;
+    --ink-2:#4b4860;
+    --muted:#7c7990;
+    --line:#e6e3f0;
+    --brand:#5a3fd6;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+  .page{max-width:1180px;margin:0 auto;padding:40px 32px 72px;}
+
+  .hero{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid var(--line);}
+  .kicker{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--brand);}
+  h1{margin:0 0 8px;font-size:28px;letter-spacing:-.01em;}
+  .sub{margin:0;font-size:14px;color:var(--muted);}
+  .tools{display:flex;gap:8px;}
+  .tools button{font:inherit;font-size:13px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink-2);cursor:pointer;transition:border-color .15s,color .15s;}
+  .tools button:hover{border-color:#c9c2ee;color:var(--brand);}
+
+  .map{display:grid;grid-template-columns:224px minmax(0,1fr);margin-top:32px;}
+  .root-col{position:relative;padding-right:26px;}
+  .root-col::after{content:"";position:absolute;right:0;top:50%;width:24px;height:2px;background:#b7a8ee;}
+  .root{position:sticky;top:24px;background:#1c1a2a;color:#fff;border-radius:16px;padding:24px 22px;box-shadow:0 12px 32px rgba(58,40,130,.18);}
+  .root-tag{display:inline-block;font-size:11px;letter-spacing:.2em;color:#b7a8ee;margin-bottom:10px;}
+  .root h2{margin:0 0 8px;font-size:24px;}
+  .root p{margin:0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.68);}
+
+  .rail{display:flex;flex-direction:column;gap:14px;padding-left:26px;border-left:2px solid var(--line);}
+  .branch{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px 16px;box-shadow:0 2px 10px rgba(40,30,90,.04);}
+  .branch::before{content:"";position:absolute;left:-27px;top:31px;width:25px;height:2px;background:var(--c);opacity:.6;}
+  .branch::after{content:"";position:absolute;left:-31px;top:28px;width:8px;height:8px;border-radius:50%;background:var(--c);}
+
+  .branch-head{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;padding:0;cursor:pointer;text-align:left;font:inherit;}
+  .num{flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;border-radius:8px;font-size:13px;font-weight:700;color:var(--c);background:var(--tint);border:1px solid color-mix(in srgb,var(--c) 30%, #ffffff);}
+  .name{font-size:17px;font-weight:700;color:var(--ink);}
+  .hint{margin-left:auto;font-size:12px;color:var(--muted);font-weight:400;}
+  .chev{flex:0 0 auto;width:18px;text-align:center;font-size:12px;color:var(--muted);transition:transform .2s;}
+  .branch.collapsed .chev{transform:rotate(-90deg);}
+
+  .leaves{margin-top:12px;display:grid;gap:8px;}
+  .branch.collapsed .leaves{display:none;}
+
+  .leaf{background:var(--surface-2);border-left:3px solid var(--c);border-radius:10px;padding:9px 13px;}
+  .leaf-t{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;font-size:14px;line-height:1.55;}
+  .leaf-k{font-weight:600;color:var(--c);white-space:nowrap;}
+  .leaf-v{color:var(--ink-2);}
+  .subs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .sub{font-size:12.5px;line-height:1.5;padding:4px 9px;border-radius:8px;background:#fff;border:1px dashed color-mix(in srgb,var(--c) 32%, #e2dfef);color:#514d66;}
+
+  .foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);line-height:1.8;}
+
+  @media (max-width:820px){
+    .page{padding:24px 18px 48px;}
+    .map{grid-template-columns:1fr;}
+    .root-col{padding:0 0 18px;}
+    .root-col::after{display:none;}
+    .root{position:static;}
+    .rail{border-left:0;padding-left:0;}
+    .branch::before,.branch::after{display:none;}
+    .hint{display:none;}
+    h1{font-size:23px;}
+  }
+
+  @media print{
+    @page{size:A4;margin:12mm;}
+    body{background:#fff;}
+    .page{max-width:none;padding:0;}
+    .tools{display:none;}
+    .root{position:static;box-shadow:none;}
+    .branch{break-inside:avoid;box-shadow:none;}
+    .map{grid-template-columns:180px 1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div>
+      <p class="kicker">行测 · 判断推理 · 类比</p>
+      <h1>类比推理：逻辑关系全景图</h1>
+      <p class="sub">8 大类关系 · 29 个考法 · 二级辨析另挂——先定大类，再抠二级</p>
+    </div>
+    <div class="tools">
+      <button type="button" data-act="expand">全部展开</button>
+      <button type="button" data-act="collapse">全部收起</button>
+      <button type="button" data-act="print">打印 / 存 PDF</button>
+    </div>
+  </header>
+
+  <main class="map">
+    <div class="root-col">
+      <div class="root">
+        <span class="root-tag">ROOT</span>
+        <h2>逻辑关系</h2>
+        <p>先判两个词之间<br>到底是哪一种关系，<br>再去比二级差异。</p>
+      </div>
+    </div>
+
+    <div class="rail">
+
+      <section class="branch" style="--c:#6b5bd2;--tint:#f1eefc;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">一</span>
+          <span class="name">全同关系</span>
+          <span class="hint">同一个东西，两个叫法</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">一般全同</span><span class="leaf-v">土豆 = 马铃薯</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">古今全同</span><span class="leaf-v">学校 = 庠序</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">人名称谓</span><span class="leaf-v">李世民 = 唐太宗</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">简称</span><span class="leaf-v">鲁 = 山东、闽 = 福建</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">中外对应</span><span class="leaf-v">电子邮件 = 伊妹儿（音译）</span></div></div>
+        </div>
+      </section>
+
+      <section class="branch" style="--c:#2f7fb5;--tint:#eaf3fa;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">二</span>
+          <span class="name">并列关系</span>
+          <span class="hint">同一层级，两两分开</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">矛盾关系</span><span class="leaf-v">动与静——非此即彼，没有第三种情况</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">反对关系</span><span class="leaf-v">苹果与香蕉——同一层级，但还有其他情况</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">顺序与衔接</span><span class="leaf-v">小学→中学→大学（递进）；春天→夏天（紧密衔接）</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">反向种属</span><span class="leaf-v">萝卜不属于水果——层级不同，不能算并列</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">动力来源</span><span class="leaf-v">自行车（人力）vs 摩托车（发动机）</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">内部转化</span><span class="leaf-v">儿子→父亲→祖父：身份随阶段变化</span></div></div>
+        </div>
+      </section>
+
+      <section class="branch" style="--c:#2f8f6f;--tint:#eaf6f1;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">三</span>
+          <span class="name">种属关系</span>
+          <span class="hint">小类往大类里装</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">基础考法</span><span class="leaf-v">苹果 是 水果（种属，不是并列）</span></div></div>
+          <div class="leaf">
+            <div class="leaf-t"><span class="leaf-k">二级辨析</span><span class="leaf-v">种属里的四个高频切口</span></div>
+            <div class="subs">
+              <span class="sub">特指 vs 泛指：故宫（特指）是建筑；钢笔（泛指）是文具</span>
+              <span class="sub">修饰词改变范围：中药 → 草药</span>
+              <span class="sub">命名方式：马蹄莲（按形状命名）</span>
+              <span class="sub">词性差异：黄金（名词）vs 金黄（形容词）</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="branch" style="--c:#b5713a;--tint:#fbf3ec;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">四</span>
+          <span class="name">交叉关系</span>
+          <span class="hint">你中有我，我中有你</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">基础考法</span><span class="leaf-v">党员 和 干部——不同角度描述同一类人</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">三者交叉</span><span class="leaf-v">青年、党员、教师——多维度交叉</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">交叉产物</span><span class="leaf-v">军人 + 医生 = 军医</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">识别技巧</span><span class="leaf-v">四个"有的"造句法</span></div>
+            <div class="subs">
+              <span class="sub">有的 A 是 B</span>
+              <span class="sub">有的 A 不是 B</span>
+              <span class="sub">有的 B 是 A</span>
+              <span class="sub">有的 B 不是 A</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="branch" style="--c:#a34b8a;--tint:#fbf0f7;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">五</span>
+          <span class="name">顺承关系</span>
+          <span class="hint">动作有先后，顺序不能倒</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">基础考法</span><span class="leaf-v">动作有先后顺序，换序即错</span></div></div>
+          <div class="leaf">
+            <div class="leaf-t"><span class="leaf-k">二级辨析</span><span class="leaf-v">看主体，也看结局</span></div>
+            <div class="subs">
+              <span class="sub">主体是否一致：买票→乘车（同一主体）</span>
+              <span class="sub">主体是否一致：挂号→诊断→手术（多主体）</span>
+              <span class="sub">结果是否圆满：报名→考试→上岸（圆满）</span>
+              <span class="sub">结果是否圆满：报名→考试→落榜（不圆满）</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="branch" style="--c:#c0553f;--tint:#fdf1ee;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">六</span>
+          <span class="name">因果关系</span>
+          <span class="hint">A 导致 B</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">基础考法</span><span class="leaf-v">A 导致 B</span></div></div>
+          <div class="leaf">
+            <div class="leaf-t"><span class="leaf-k">常见考法</span><span class="leaf-v">素材来源五花八门</span></div>
+            <div class="subs">
+              <span class="sub">生活事件：感冒 → 发烧</span>
+              <span class="sub">成语典故：水落 → 石出</span>
+              <span class="sub">诗句古文：少壮不努力 → 老大徒伤悲</span>
+              <span class="sub">连锁因果：砍伐森林 → 水土流失 → 土地荒漠化</span>
+              <span class="sub">多因一果：运动 / 节食 → 减肥；高温 + 干旱 → 森林火灾</span>
+            </div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-t"><span class="leaf-k">二级辨析</span><span class="leaf-v">四个必比点</span></div>
+            <div class="subs">
+              <span class="sub">人为 vs 自然：乱砍滥伐→水土流失（人为）；地震→房屋倒塌（自然）</span>
+              <span class="sub">结果好坏：勤奋→成功（好）；懒惰→失败（坏）</span>
+              <span class="sub">必然 vs 或然：水烧到 100℃→沸腾（必然）；努力→成功（或然）</span>
+              <span class="sub">主体是否一致：奋斗→成功（同一主体）；教学→进步（多主体）</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="branch" style="--c:#6a8a33;--tint:#f4f8ea;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">七</span>
+          <span class="name">目的关系</span>
+          <span class="hint">做 A 是为了 B</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">基础考法</span><span class="leaf-v">运动 是为了 健身</span></div></div>
+          <div class="leaf">
+            <div class="leaf-t"><span class="leaf-k">二级辨析</span><span class="leaf-v">目的到底能不能实现</span></div>
+            <div class="subs">
+              <span class="sub">不能实现：缘木求鱼</span>
+              <span class="sub">能实现但代价大：杀鸡取卵</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="branch" style="--c:#3f6d9e;--tint:#edf2f9;">
+        <button class="branch-head" type="button" aria-expanded="true">
+          <span class="num">八</span>
+          <span class="name">条件关系</span>
+          <span class="hint">充分 / 必要，别记反</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-t"><span class="leaf-k">基础考法</span><span class="leaf-v">充分 vs 必要</span></div>
+            <div class="subs">
+              <span class="sub">充分条件：有 A 就有 B</span>
+              <span class="sub">必要条件：没 A 就没 B</span>
+            </div>
+          </div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">生活例子</span><span class="leaf-v">开车 → 有驾照；没驾照 → 不能开车</span></div></div>
+          <div class="leaf">
+            <div class="leaf-t"><span class="leaf-k">句式识别</span><span class="leaf-v">看关联词，直接定型</span></div>
+            <div class="subs">
+              <span class="sub">充分：如果 A 就 B / 只要 A 就 B</span>
+              <span class="sub">必要：不 A 不 B / 只有 A 才 B</span>
+            </div>
+          </div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">隐含条件</span><span class="leaf-v">天时地利人和 → 百战不殆（隐含必要条件）</span></div></div>
+          <div class="leaf"><div class="leaf-t"><span class="leaf-k">生活实例</span><span class="leaf-v">氧气是燃烧的必要条件</span></div></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <p class="foot">用法：点大类标题可折叠/展开；打印建议 A4 纵向，会自动隐藏按钮并避免卡片跨页断开。<br>提示：第八类里"开车→有驾照"按逻辑应是"有驾照是开车的必要条件"，记的时候别把充分/必要记反。</p>
+</div>
+
+<script>
+  (function () {
+    var page = document.querySelector('.page');
+    if (!page) return;
+
+    page.addEventListener('click', function (e) {
+      var btn = e.target.closest('button');
+      if (!btn || !page.contains(btn)) return;
+
+      var act = btn.getAttribute('data-act');
+      if (act === 'print') { window.print(); return; }
+
+      if (act === 'expand' || act === 'collapse') {
+        var heads = page.querySelectorAll('.branch-head');
+        for (var i = 0; i < heads.length; i++) toggle(heads[i], act === 'collapse');
+        return;
+      }
+
+      if (btn.classList.contains('branch-head')) {
+        toggle(btn, btn.getAttribute('aria-expanded') === 'true');
+      }
+    });
+
+    function toggle(head, collapsed) {
+      head.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      head.closest('.branch').classList.toggle('collapsed', collapsed);
+    }
+  })();
+</script>
+</body>
+</html>
